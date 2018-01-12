@@ -7,20 +7,23 @@ defmodule MyAppWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-  end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+    plug Guardian.Plug.Pipeline,
+      module: MyAppWeb.Guardian,
+      error_handler: MyAppWeb.AuthController
+
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource, allow_blank: true
   end
 
   scope "/", MyAppWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", MyAppWeb do
-  #   pipe_through :api
-  # end
+    get "/login", AuthController, :new
+    get "/logout", AuthController, :destroy
+    post "/login", AuthController, :create
+    get "/login/:magic_token", AuthController, :callback
+  end
 end

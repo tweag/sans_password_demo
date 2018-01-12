@@ -1,0 +1,16 @@
+<h1 class="page-header">Login</h1>
+
+<%= form_for @changeset, auth_path(@conn, :create), fn f -> %>
+  <div class="form-group <%= if Enum.any?(f.errors), do: "has-error" %>">
+    <label class="control-label" for="email">
+      What's your email address?
+    </label>
+
+    <%= email_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    Login
+  </button>
+<% end %>

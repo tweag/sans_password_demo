@@ -1,36 +1,23 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<section>
+  <%= if @current_user do %>
+    <h1 class="page-header">Authenticated</h1>
+    <p class="lead">You are currently signed in as <code><%= @current_user.email %></code>.</p>
+    <%= link "Logout", to: auth_path(@conn, :destroy), class: "btn btn-lg btn-primary" %>
+  <% else %>
+    <h1 class="page-header">Unauthenticated</h1>
+    <p class="lead">You are not signed in.</p>
+    <%= link "Login", to: auth_path(@conn, :new), class: "btn btn-lg btn-primary" %>
+  <% end %>
+</section>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
+<section>
+  <h1 class="page-header">Listing users</h1>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
+  <ul class="list-group">
+    <%= for user <- @users do %>
+      <li class="list-group-item">
+        <%= user.email %>
       </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
-</div>
+    <% end %>
+  </ul>
+</section>
