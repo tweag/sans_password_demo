@@ -22,6 +22,14 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :my_app, MyAppWeb.Guardian,
+      issuer: "my_app",
+      secret_key: "094QDdNTWzT7rRLEi/H//Txbdm3qv0ylzya4mP0KtwztMaaAAY1Xt53bhHXTEkrQ",
+      token_ttl: %{
+        "magic" => {30, :minutes},
+        "access" => {1, :days}
+      }
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
