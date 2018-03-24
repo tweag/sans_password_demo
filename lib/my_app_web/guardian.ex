@@ -21,7 +21,7 @@ defmodule MyAppWeb.Guardian do
   end
 
   @impl true
-  def deliver_magic_link(_user, magic_token, _opts) do
+  def deliver_magic_link(user, magic_token, _opts) do
     require Logger
     alias MyAppWeb.Endpoint
     import MyAppWeb.Router.Helpers
@@ -34,5 +34,10 @@ defmodule MyAppWeb.Guardian do
         #{auth_url(Endpoint, :callback, magic_token)}
 
     """
+    
+    # Uncomment the following lines to send email, SMTP settings in config.exs
+    # text = "Click this link to login #{auth_url(Endpoint, :callback, magic_token)}"
+    # MyApp.Email.welcome_text_email(user.email, text) |> MyApp.Mailer.deliver_later
+    
   end
 end

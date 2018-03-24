@@ -17,6 +17,16 @@ config :my_app, MyAppWeb.Endpoint,
   pubsub: [name: MyApp.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :my_app, MyApp.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: System.get_env("SMTP_DOMAIN"),
+  port: String.to_integer(System.get_env("SMTP_PORT")),
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  tls: :always, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 5
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
