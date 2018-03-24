@@ -20,7 +20,7 @@ defmodule MyApp.Mixfile do
   def application do
     [
       mod: {MyApp.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo]
     ]
   end
 
@@ -41,7 +41,9 @@ defmodule MyApp.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:bamboo, "~> 0.7"},
+      {:bamboo_smtp, "~> 1.2.1"}
     ]
   end
 

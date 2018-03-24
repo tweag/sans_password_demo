@@ -16,3 +16,14 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+# Sending emails
+Uncomment the mail sending line in `lib/my_app_web/guardian.ex`.
+
+Configure the following SMTP environment variables to send emails:
+- SMTP_DOMAIN
+- SMTP_PORT
+- SMTP_USERNAME
+- SMTP_PASSWORD
+
+Additional SMTP settings are found in `config/config.exs`.
